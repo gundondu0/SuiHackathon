@@ -1,0 +1,33 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "target": "es6",
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "outDir": "dist",
+        "isolatedModules": true,
+        "resolveJsonModule": true,
+        "paths": {
+            "*": [
+                "node_modules/*"
+            ],
+        "@middleware/*": ["./src/middleware/*"],
+        "@controllers/*": ["./src/controllers/*"],
+        "@services/*": ["./src/services/*"],
+        "@basetypes/*": ["./src/types/*"],
+        "@sharedtypes/*": ["../types/*"],
+        "@models/*":["./src/models/*"],
+        "@utils/*":["./src/utils/*"],
+        },
+        "baseUrl": ".",
+    },
+    "include": [
+        "./types/**/*.d.ts",
+        "src/**/*",
+        "../types/myTypes.d.ts",
+        "../types/enums.ts"  ],
+       
+        
+}

@@ -1,0 +1,213 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'node_modules/modern-normalize/modern-normalize.css';
+
+
+body{
+  background-color: #313049!important;
+
+}
+html{
+  scroll-behavior: smooth !important;
+
+}
+.button-gradient {
+  background: linear-gradient(to right, #38B2AC, #4FD1C5, #63DBD0);
+}
+.transition-bg-color {
+  transition: background-color 0.3s ease;
+}
+.transition-bg-color:hover {
+  transition: background-color 0.3s ease;
+}
+@font-face {
+  font-family: 'castlevania';
+  src: url('/CinzelDecorative-Bold.ttf') format('truetype');
+  /* Add additional src statements for different font file formats if necessary */
+}
+
+.logoFont {
+  font-family: 'castlevania', Arial, sans-serif !important;
+}
+.logoWhite{
+  -webkit-filter: invert(100%); /* Safari/Chrome */
+
+  filter: invert(100%);
+
+}
+
+.mainaa{
+  background-image: url("/public/sun-tornado.svg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+}
+
+.outer-panel{
+  box-shadow: 12px 12px 0 #0000003a;
+  border-radius: 10px;
+  border-color: black;
+  border-width: 2px;
+}
+
+.just-shadow{
+  box-shadow: 12px 12px 0 #0000003a;
+}
+.outer-circle{
+  box-shadow: 12px 12px 0 #0000003a;
+  border-radius: 50%px;
+  border-color: black;
+  border-width: 2px;
+}
+
+*::-webkit-scrollbar {
+  width: 15px;     
+  /* width of the entire scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+  background: #1f1e48;  
+  /* color of the tracking area */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #DD6B20;      /* color of the scroll thumb */
+  border-radius: 15px;   
+  border: 4px solid #1f1e48;    /* creates padding around scroll thumb */
+}
+
+.mainButton {
+  
+  background: linear-gradient(-45deg,  #8c0293,#DD6B20, #3b96dc, #002b6f);
+	background-size: 200% 200% ;
+	animation: gradient 4s ease infinite ;
+  border-radius: 10px;
+  border: 3px solid transparent;
+  border-color: black;
+  
+  transition: transfrom,0.5s;
+
+
+}
+
+.mainButton:hover {
+	background: linear-gradient(-45deg,  #8c0293,#DD6B20, #3b96dc, #002b6f);
+	background-size: 200% 200%;
+	animation: gradient 0.7s ease infinite;
+  transform: scale(1.1);
+
+
+}
+
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
+#showcase .mainHeader{
+  position: relative;
+  animation: heading;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes heading{
+  0% {top: -550px;}
+  100% {top: 0px;}
+}
+
+#content {
+  position: relative;
+  animation-name: content;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes content{
+  0% {left: -1000px;}
+  100% {left: 0px;}
+}
+
+
+@keyframes btn {
+  0% {opacity: 0;}
+  100% {opacity: 1}
+}
+.heroImg{
+  position: relative;
+  opacity: 0;
+  animation-name: heroFadeIn, heroAnimation;
+  animation-duration: 2s, 5s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  animation-iteration-count:1, infinite;
+
+
+}
+
+@keyframes heroFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes heroAnimation {
+  0%, 100% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.1) translateY(-20px); }
+}
+
+
+
+
+arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform: rotate(90deg);
+  cursor: pointer;
+}
+
+.arrow span {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  border-bottom: 5px solid #DD6B20;
+  border-right: 5px solid #DD6B20;
+  transform: rotate(45deg);
+  margin: -10px;
+  animation: animate 1s infinite;
+
+}
+
+.arrow span:nth-child(2) {
+  animation-delay: -0.1s;
+}
+
+.arrow span:nth-child(3) {
+  animation-delay: -0.2s;
+}
+
+@keyframes animate {
+  0% {
+      opacity: 0;
+      transform: rotate(45deg) translate(-20px, -20px);
+  }
+  50% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0;
+      transform: rotate(45deg) translate(20px, 20px);
+  }
+}

@@ -1,0 +1,8 @@
+{
+    "contract":"0x6c303b7b21c3d8486126ba80c101dd31dcad619592b759e4e1146cdc7f3a3d02",
+    "fee_payer":"0xcfafabc1760b8205204023058449cad2d2daebbfc9ea66400f951b5890d54099",
+    "token_a":"0xcd40c5f33cba8a07eb05da766f25a71e95377a594dd0b1e48550b7c8b26cb568::token_a::TOKEN_A",
+    "token_b":"0xcd40c5f33cba8a07eb05da766f25a71e95377a594dd0b1e48550b7c8b26cb568::token_b::TOKEN_B",
+    "current_pools":[
+        "0x097ab820e532e6cc2225e6c076b65cafc53bd73f1570db837c9b4b37648bf0b0"]
+}
