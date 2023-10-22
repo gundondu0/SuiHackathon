@@ -66,9 +66,9 @@ const HomePage: React.FC = () => {
     const temp = async () => {
       const currPools = await fetchPools();
       setPools(currPools);
-    }
+    };
     temp();
-  }, [])
+  }, []);
   useEffect(() => {
     if (Cookies.get("zk_jwt") == undefined) {
       setIsDisabled(true);
@@ -119,121 +119,136 @@ const HomePage: React.FC = () => {
 
   return (
     <Box alignContent={"flex"} w="80vw" margin="auto">
-       <Center>
-      <HStack mt={"4rem"} mb={"4rem"} h={"100%"} spacing={10}>
-        {userState != 2 ? (
-          <>
-            <ConnectButton
-              connectText={"Connect Wallet"}
-              connectedText={`Connected: ${formatAddress(
-                currentAccount ? currentAccount.address : ""
-              )}`}
-            />
-          </>
-        ) : (
-          <> </>
-        )}
+      <Center>
+        <HStack mt={"4rem"} mb={"4rem"} h={"100%"} spacing={10}>
+          {userState != 2 ? (
+            <>
+              <ConnectButton
+                connectText={"Connect Wallet"}
+                connectedText={`Connected: ${formatAddress(
+                  currentAccount ? currentAccount.address : ""
+                )}`}
+              />
+            </>
+          ) : (
+            <> </>
+          )}
 
-        {userState == 0 ? <Heading>OR </Heading> : <> </>}
+          {userState == 0 ? <Heading>OR </Heading> : <> </>}
 
-        {userState == 2 ? (
-          <>
-            <Text>Address:{zkUserAddress}</Text>
-            <Text>Balance:{parseInt(zkUserBalance) / 10 ** 9} SUI</Text>
-            <Button onClick={handleLogout}>Logout</Button>
-          </>
-        ) : (
-          <>
-            {" "}
-            {userState == 0 ? (
-              <>
-                <Button
-                  colorScheme="red"
-                  onClick={async () => {
-                    const ephemeralKeyPair = new Ed25519Keypair();
-                    let randomness = generateRandomness();
-                    const nonce = generateNonce(
-                      ephemeralKeyPair.getPublicKey(),
-                      maxEpoch,
-                      randomness
-                    );
+          {userState == 2 ? (
+            <>
+              <Text>Address:{zkUserAddress}</Text>
+              <Text>Balance:{parseInt(zkUserBalance) / 10 ** 9} SUI</Text>
+              <Button onClick={handleLogout}>Logout</Button>
+            </>
+          ) : (
+            <>
+              {" "}
+              {userState == 0 ? (
+                <>
+                  <Button
+                    colorScheme="red"
+                    onClick={async () => {
+                      const ephemeralKeyPair = new Ed25519Keypair();
+                      let randomness = generateRandomness();
+                      const nonce = generateNonce(
+                        ephemeralKeyPair.getPublicKey(),
+                        maxEpoch,
+                        randomness
+                      );
 
-                    Cookies.set("randomness", randomness.toString());
+                      Cookies.set("randomness", randomness.toString());
 
-                    Cookies.set(
-                      "privkey",
-                      ephemeralKeyPair.export().privateKey
-                    );
-                    const params = new URLSearchParams({
-                      // See below for how to configure client ID and redirect URL
-                      client_id:
-                        "922729408934-tvnb4ps8h9kb9bgfgosj8klitc4f8rlm.apps.googleusercontent.com",
+                      Cookies.set(
+                        "privkey",
+                        ephemeralKeyPair.export().privateKey
+                      );
+                      const params = new URLSearchParams({
+                        // See below for how to configure client ID and redirect URL
+                        client_id:
+                          "922729408934-tvnb4ps8h9kb9bgfgosj8klitc4f8rlm.apps.googleusercontent.com",
 
-                      redirect_uri: "http://localhost:3000/auth",
-                      response_type: "id_token",
-                      scope: "openid",
-                      // See below for details about generation of the nonce
-                      nonce: nonce,
-                    });
+                        redirect_uri: "http://localhost:3000/auth",
+                        response_type: "id_token",
+                        scope: "openid",
+                        // See below for details about generation of the nonce
+                        nonce: nonce,
+                      });
 
-                    const loginURL = `https://accounts.google.com/o/oauth2/v2/auth?${params}`;
+                      const loginURL = `https://accounts.google.com/o/oauth2/v2/auth?${params}`;
 
-                    window.location.assign(loginURL);
-                    return;
-                  }}
-                >
-                  {" "}
-                  Login with Gmail
-                </Button>
-              </>
-            ) : (
-              <> </>
-            )}
-            <Button onClick={async ()=>{
-              const a = await fetchPools()
-              console.log(a);
-              
-
-            }}></Button>
-          </>
-        )}
-
-        
-      </HStack>
-    </Center>
-      <HStack       bg="main"
-        borderBottom="1px solid"
-        p="16px"
-        m="4px"
-        borderLeft={"1px solid transparent"}
-        borderRight={"1px solid transparent"}
-        spacing="16px"
-        borderTopRadius="lg">
-      <Text textAlign={"center"} ml="6" mr="6" w="8rem" fontWeight="bold">
-          Pool
-        </Text>
-        <Text textAlign={"center"}  ml="25" mr="75px" w="4rem" fontWeight="bold">
-          Rate
-        </Text>
-        <Text textAlign={"center"}  w="4rem" fontWeight="bold">
-          Volume
-        </Text>
-        <CreatePoolModal currentAccount={currentAccount} userState={userState} zkUserAddress={zkUserAddress}  />
-
-      </HStack>
-      {pools.map((pool:Pool) => (
-        <PoolItem
-
-          key={pool.id.id}
-          userState={userState}
-          zkUserAddress={zkUserAddress}
-          poolId={pool.id.id}
-          volatile={parseInt(pool.token_a_pool)/(10**9)}
-          stable={parseInt(pool.token_b_pool)/(10**9)}
-          exchange={(parseInt(pool.token_a_pool)/parseInt(pool.token_b_pool))}
-          volume={"A: "+ parseInt(pool.token_a_pool)/(10**9)+" / B: "+parseInt(pool.token_b_pool)/(10**9)}
-        />
-      ))}
+                      window.location.assign(loginURL);
+                      return;
+                    }}
+                  >
+                    {" "}
+                    Login with Gmail
+                  </Button>
+                </>
+              ) : (
+                <> </>
+              )}
+              <Button
+                onClick={async () => {
+                  const a = await fetchPools();
+                  console.log(a);
+                }}
+              ></Button>
+            </>
+          )}
+        </HStack>
+      </Center>
+      <Box bg={"mainDark"} padding={"2rem"} borderRadius={"3xl"}>
+        <HStack
+          bg="main"
+          borderBottom="1px solid"
+          p="16px"
+          m="4px"
+          borderLeft={"1px solid transparent"}
+          borderRight={"1px solid transparent"}
+          spacing="16px"
+          borderTopRadius="lg"
+        >
+          <Text textAlign={"center"} ml="6" mr="6" w="8rem" fontWeight="bold">
+            Pool
+          </Text>
+          <Text
+            textAlign={"center"}
+            ml="25"
+            mr="75px"
+            w="4rem"
+            fontWeight="bold"
+          >
+            Rate
+          </Text>
+          <Text textAlign={"center"} w="4rem" fontWeight="bold">
+            Volume
+          </Text>
+          <CreatePoolModal
+            currentAccount={currentAccount}
+            userState={userState}
+            zkUserAddress={zkUserAddress}
+          />
+        </HStack>
+        {pools.map((pool: Pool) => (
+          <PoolItem
+            key={pool.id.id}
+            userState={userState}
+            zkUserAddress={zkUserAddress}
+            poolId={pool.id.id}
+            volatile={parseInt(pool.token_a_pool) / 10 ** 9}
+            stable={parseInt(pool.token_b_pool) / 10 ** 9}
+            exchange={parseInt(pool.token_a_pool) / parseInt(pool.token_b_pool)}
+            volume={
+              "A: " +
+              parseInt(pool.token_a_pool) / 10 ** 9 +
+              " / B: " +
+              parseInt(pool.token_b_pool) / 10 ** 9
+            }
+          />
+        ))}
+      </Box>
     </Box>
   );
 };

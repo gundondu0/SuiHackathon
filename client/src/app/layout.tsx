@@ -14,19 +14,15 @@ export default function RootLayout({
   return (
     <html>
       <head>
-        <title>BEST DEX EVER</title>
+        <title>Kabwa</title>
       </head>
-      <body className="mainaa">
+      <body style={{ backgroundImage: "url(/sun-tornado.svg)", backgroundRepeat: "no-repeat", backgroundPosition: 'center',
+  backgroundSize: 'cover',}}>
         <ChakraProvider>
           <SuiProvider>
-            <Box
-              bgColor="mainDark"
-              h="100vh"
-            >
               <Header />
               {children}
               <Footer />
-            </Box>
           </SuiProvider>
         </ChakraProvider>
       </body>
